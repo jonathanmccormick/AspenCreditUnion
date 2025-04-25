@@ -32,7 +32,7 @@ class TransactionRepository {
     // Use cached transactions if available and no limit is specified or limit matches cached count
     let cachedTransactions = transactionCache[accountId]
     if let cachedTransactions = cachedTransactions,
-       (limit == nil || cachedTransactions.count <= limit!) {
+       limit == nil || cachedTransactions.count <= limit! {
       return Just(limit != nil ? Array(cachedTransactions.prefix(limit!)) : cachedTransactions)
         .setFailureType(to: Error.self)
         .receive(on: DispatchQueue.main)
