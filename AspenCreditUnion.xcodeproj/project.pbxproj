@@ -99,6 +99,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F9B2B6152DBB0DF500C4582D /* Build configuration list for PBXNativeTarget "AspenCreditUnion" */;
 			buildPhases = (
+				F9A149712DBB46A4007F75AF /* Run swiftlint */,
 				F9B2B5ED2DBB0DF400C4582D /* Sources */,
 				F9B2B5EE2DBB0DF400C4582D /* Frameworks */,
 				F9B2B5EF2DBB0DF400C4582D /* Resources */,
@@ -230,6 +231,29 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		F9A149712DBB46A4007F75AF /* Run swiftlint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/.swiftlint.yml",
+				"${SRCROOT}/AspenCreditUnion",
+			);
+			name = "Run swiftlint";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export PATH=\"/opt/homebrew/bin:$PATH\"\nswiftlint lint --config \"${SRCROOT}/.swiftlint.yml\" --strict \"${SRCROOT}/AspenCreditUnion\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		F9B2B5ED2DBB0DF400C4582D /* Sources */ = {
