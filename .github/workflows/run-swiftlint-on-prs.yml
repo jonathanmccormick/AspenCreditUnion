@@ -16,20 +16,3 @@ jobs:
 
       - name: Run SwiftLint and output JSON
         run: swiftlint --reporter json > swiftlint_output.json
-
-      - name: Comment SwiftLint stats on PR
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PR_NUMBER: ${{ github.event.pull_request.number }}
-        run: |
-          WARNINGS=$(jq '[.[] | select(.severity=="Warning")] | length' swiftlint_output.json)
-          ERRORS=$(jq '[.[] | select(.severity=="Error")] | length' swiftlint_output.json)
-          TOP_RULES=$(jq -r '[.[] | .rule_id] | group_by(.) | map({rule: .[0], count: length}) | sort_by(-.count) | .[0:5] | map("  - `\(.rule)`: \(.count) violations") | join("\n")' swiftlint_output.json)
-
-          COMMENT="## SwiftLint Report
-          - Warnings: \`$WARNINGS\`
-          - Errors: \`$ERRORS\`
-          - Top Violations:
-          $TOP_RULES"
-
-          gh pr comment "$PR_NUMBER" --body "$COMMENT"
