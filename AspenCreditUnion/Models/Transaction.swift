@@ -115,4 +115,6 @@ enum TransactionType: String, Codable {
   case fee
   /// Interest applied to account
   case interest
+  /// Payment on a loan or bill
+  case payment
 }

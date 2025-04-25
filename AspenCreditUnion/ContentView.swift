@@ -176,7 +176,7 @@ struct ContentView: View {
           .padding(.vertical)
       } else {
         ForEach(viewModel.loans) { loan in
-          NavigationLink(destination: Text("Loan Details: \(loan.name)")) {
+          NavigationLink(destination: LoanDetailsView(loanId: loan.id)) {
             loanRow(loan)
           }
           .buttonStyle(.plain)
