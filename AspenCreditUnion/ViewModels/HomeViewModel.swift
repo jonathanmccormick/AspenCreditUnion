@@ -1,6 +1,13 @@
 import Foundation
 import Combine
 
+/// Data structure to hold user, accounts, and loans
+private struct UserData {
+  let user: User
+  let accounts: [Account]
+  let loans: [Loan]
+}
+
 /// ViewModel that provides data for the home screen of the banking app
 @MainActor
 final class HomeViewModel: ObservableObject {
@@ -57,18 +64,21 @@ final class HomeViewModel: ObservableObject {
     
     // First fetch the user
     userRepository.getCurrentUser()
-      .flatMap { [weak self] user -> AnyPublisher<(User, [Account], [Loan]), Error> in
+      .flatMap { [weak self] user -> AnyPublisher<UserData, Error> in
         guard let self = self else {
           return Fail(error: NSError(domain: "HomeViewModel", code: 0, userInfo: nil))
             .eraseToAnyPublisher()
         }
         
         // Once we have the user, fetch their accounts and loans in parallel
-        return Publishers.Zip3(
-          Just(user).setFailureType(to: Error.self),
+        return Publishers.Zip(
           self.accountRepository.getAccounts(for: user.id),
           self.loanRepository.getLoans(for: user.id)
-        ).eraseToAnyPublisher()
+        )
+        .map { accounts, loans in
+          return UserData(user: user, accounts: accounts, loans: loans)
+        }
+        .eraseToAnyPublisher()
       }
       .receive(on: DispatchQueue.main)
       .sink(
@@ -79,10 +89,10 @@ final class HomeViewModel: ObservableObject {
             self?.errorMessage = error.localizedDescription
           }
         },
-        receiveValue: { [weak self] user, accounts, loans in
-          self?.user = user
-          self?.accounts = accounts
-          self?.loans = loans
+        receiveValue: { [weak self] userData in
+          self?.user = userData.user
+          self?.accounts = userData.accounts
+          self?.loans = userData.loans
         }
       )
       .store(in: &cancellables)

@@ -1,6 +1,436 @@
 import SwiftUI
 import Combine
 
+// MARK: - Supporting View Components
+
+/// View displaying loan summary information
+private struct LoanSummaryCardView: View {
+  let loan: Loan
+  let formattedInterestRate: String
+  
+  var body: some View {
+    VStack(spacing: 16) {
+      HStack {
+        VStack(alignment: .leading, spacing: 4) {
+          Text(loan.loanType.displayName)
+            .font(.subheadline)
+            .foregroundStyle(.secondary)
+          
+          Text(loan.name)
+            .font(.title2)
+            .fontWeight(.bold)
+        }
+        
+        Spacer()
+        
+        loanTypeIcon(loan.loanType)
+      }
+      
+      Divider()
+      
+      VStack(spacing: 12) {
+        balanceRow(title: "Current Balance", amount: loan.currentBalance, isPrimary: true)
+        balanceRow(title: "Monthly Payment", amount: loan.monthlyPayment, isPrimary: false)
+        balanceRow(title: "Interest Rate", amount: nil, formattedValue: formattedInterestRate, isPrimary: false)
+      }
+    }
+    .padding()
+    .background(Color(.systemBackground))
+    .clipShape(RoundedRectangle(cornerRadius: 12))
+    .shadow(color: .black.opacity(0.1), radius: 5, x: 0, y: 2)
+    .padding(.horizontal)
+  }
+  
+  /// Balance information row
+  private func balanceRow(title: String, amount: Decimal?, formattedValue: String? = nil, isPrimary: Bool) -> some View {
+    HStack {
+      Text(title)
+        .font(isPrimary ? .headline : .subheadline)
+      
+      Spacer()
+      
+      if let amount = amount {
+        Text(formatCurrency(amount))
+          .font(isPrimary ? .title3 : .body)
+          .fontWeight(isPrimary ? .bold : .medium)
+      } else if let formattedValue = formattedValue {
+        Text(formattedValue)
+          .font(isPrimary ? .title3 : .body)
+          .fontWeight(isPrimary ? .bold : .medium)
+      }
+    }
+  }
+  
+  /// Icon representing a loan type
+  private func loanTypeIcon(_ loanType: LoanType) -> some View {
+    ZStack {
+      Circle()
+        .fill(Color.blue.opacity(0.1))
+        .frame(width: 40, height: 40)
+      
+      Image(systemName: {
+        switch loanType {
+        case .mortgage, .homeEquity:
+          return "house.fill"
+        case .auto:
+          return "car.fill"
+        case .personalLine, .personal:
+          return "person.text.rectangle.fill"
+        case .heloc:
+          return "house.and.flag.fill"
+        case .student:
+          return "books.vertical.fill"
+        }
+      }())
+      .foregroundStyle(.blue)
+    }
+  }
+  
+  /// Formats a decimal as a currency string
+  private func formatCurrency(_ value: Decimal) -> String {
+    let formatter = NumberFormatter()
+    formatter.numberStyle = .currency
+    formatter.minimumFractionDigits = 2
+    formatter.maximumFractionDigits = 2
+    return formatter.string(from: value as NSDecimalNumber) ?? "$0.00"
+  }
+}
+
+/// View displaying loan payment progress
+private struct PaymentProgressView: View {
+  let loan: Loan
+  let percentagePaid: Double
+  let totalPaid: Decimal
+  
+  var body: some View {
+    VStack(spacing: 12) {
+      HStack {
+        Text("Loan Payoff Progress")
+          .font(.headline)
+        
+        Spacer()
+        
+        Text("\(Int(percentagePaid))%")
+          .font(.headline)
+          .foregroundStyle(.blue)
+      }
+      
+      ProgressView(value: percentagePaid, total: 100)
+        .tint(.blue)
+        .frame(height: 8)
+      
+      HStack {
+        VStack(alignment: .leading, spacing: 4) {
+          Text("Original Amount")
+            .font(.caption)
+            .foregroundStyle(.secondary)
+          
+          Text(formatCurrency(loan.originalPrincipal))
+            .font(.subheadline)
+        }
+        
+        Spacer()
+        
+        VStack(alignment: .trailing, spacing: 4) {
+          Text("Total Paid")
+            .font(.caption)
+            .foregroundStyle(.secondary)
+          
+          Text(formatCurrency(totalPaid))
+            .font(.subheadline)
+        }
+      }
+    }
+    .padding()
+    .background(Color(.systemBackground))
+    .clipShape(RoundedRectangle(cornerRadius: 12))
+    .shadow(color: .black.opacity(0.1), radius: 5, x: 0, y: 2)
+    .padding(.horizontal)
+  }
+  
+  /// Formats a decimal as a currency string
+  private func formatCurrency(_ value: Decimal) -> String {
+    let formatter = NumberFormatter()
+    formatter.numberStyle = .currency
+    formatter.minimumFractionDigits = 2
+    formatter.maximumFractionDigits = 2
+    return formatter.string(from: value as NSDecimalNumber) ?? "$0.00"
+  }
+}
+
+/// View displaying next payment information
+private struct NextPaymentView: View {
+  let loan: Loan
+  let daysUntilNextPayment: Int?
+  @Binding var showingPaymentSheet: Bool
+  
+  var body: some View {
+    VStack(spacing: 16) {
+      HStack(spacing: 20) {
+        VStack(alignment: .center, spacing: 4) {
+          Text("\(daysUntilNextPayment ?? 0)")
+            .font(.system(size: 36, weight: .bold))
+            .foregroundStyle(.blue)
+          
+          Text("Days Until Due")
+            .font(.caption)
+            .foregroundStyle(.secondary)
+        }
+        .frame(maxWidth: .infinity)
+        
+        VStack(alignment: .center, spacing: 4) {
+          Text(formatCurrency(loan.nextPaymentAmount))
+            .font(.system(size: 24, weight: .bold))
+          
+          Text("Payment Amount")
+            .font(.caption)
+            .foregroundStyle(.secondary)
+        }
+        .frame(maxWidth: .infinity)
+      }
+      .padding()
+      
+      VStack(spacing: 8) {
+        Text("Due Date: \(formattedDate(loan.nextPaymentDue))")
+          .font(.subheadline)
+        
+        Button("Make Payment Now") {
+          showingPaymentSheet = true
+        }
+        .buttonStyle(.borderedProminent)
+        .padding(.top)
+      }
+    }
+    .padding()
+    .background(Color(.systemBackground))
+    .clipShape(RoundedRectangle(cornerRadius: 12))
+    .padding(.horizontal)
+  }
+  
+  /// Formats a date in a friendly readable format
+  private func formattedDate(_ date: Date) -> String {
+    let formatter = DateFormatter()
+    formatter.dateStyle = .medium
+    formatter.timeStyle = .none
+    return formatter.string(from: date)
+  }
+  
+  /// Formats a decimal as a currency string
+  private func formatCurrency(_ value: Decimal) -> String {
+    let formatter = NumberFormatter()
+    formatter.numberStyle = .currency
+    formatter.minimumFractionDigits = 2
+    formatter.maximumFractionDigits = 2
+    return formatter.string(from: value as NSDecimalNumber) ?? "$0.00"
+  }
+}
+
+/// View displaying loan details information
+private struct LoanDetailsInfoView: View {
+  let loan: Loan
+  let formattedInterestRate: String
+  
+  var body: some View {
+    VStack(spacing: 16) {
+      detailGroup(title: "Loan Information") {
+        detailRow(title: "Account Number", value: loan.accountNumber)
+        detailRow(title: "Loan Type", value: loan.loanType.displayName)
+        detailRow(title: "Interest Rate", value: formattedInterestRate)
+      }
+      
+      detailGroup(title: "Important Dates") {
+        detailRow(title: "Origination Date", value: formattedDate(loan.originationDate))
+        detailRow(title: "Maturity Date", value: formattedDate(loan.maturityDate))
+        detailRow(title: "Payments Remaining", value: "\(loan.remainingPayments)")
+      }
+      
+      detailGroup(title: "Payment Information") {
+        detailRow(title: "Original Principal", value: formatCurrency(loan.originalPrincipal))
+        detailRow(title: "Current Balance", value: formatCurrency(loan.currentBalance))
+        detailRow(title: "Monthly Payment", value: formatCurrency(loan.monthlyPayment))
+      }
+    }
+    .padding()
+    .background(Color(.systemBackground))
+    .clipShape(RoundedRectangle(cornerRadius: 12))
+    .padding(.horizontal)
+  }
+  
+  /// Group of detail rows with a title
+  private func detailGroup<Content: View>(title: String, @ViewBuilder content: () -> Content) -> some View {
+    VStack(alignment: .leading, spacing: 12) {
+      Text(title)
+        .font(.headline)
+        .padding(.bottom, 4)
+      
+      content()
+    }
+  }
+  
+  /// Detail information row
+  private func detailRow(title: String, value: String) -> some View {
+    HStack {
+      Text(title)
+        .font(.subheadline)
+        .foregroundStyle(.secondary)
+      
+      Spacer()
+      
+      Text(value)
+        .font(.subheadline)
+    }
+  }
+  
+  /// Formats a date in a friendly readable format
+  private func formattedDate(_ date: Date) -> String {
+    let formatter = DateFormatter()
+    formatter.dateStyle = .medium
+    formatter.timeStyle = .none
+    return formatter.string(from: date)
+  }
+  
+  /// Formats a decimal as a currency string
+  private func formatCurrency(_ value: Decimal) -> String {
+    let formatter = NumberFormatter()
+    formatter.numberStyle = .currency
+    formatter.minimumFractionDigits = 2
+    formatter.maximumFractionDigits = 2
+    return formatter.string(from: value as NSDecimalNumber) ?? "$0.00"
+  }
+}
+
+/// View displaying payment history
+private struct PaymentHistoryView: View {
+  let paymentHistory: [Transaction]
+  
+  var body: some View {
+    VStack(spacing: 0) {
+      if paymentHistory.isEmpty {
+        Text("No payment history found")
+          .foregroundStyle(.secondary)
+          .frame(maxWidth: .infinity, minHeight: 100)
+          .background(Color(.systemBackground))
+      } else {
+        ForEach(paymentHistory) { payment in
+          paymentRow(payment)
+          
+          if let lastPayment = paymentHistory.last, payment.id != lastPayment.id {
+            Divider()
+              .padding(.horizontal)
+          }
+        }
+      }
+    }
+    .background(Color(.systemGray6))
+    .clipShape(RoundedRectangle(cornerRadius: 12))
+    .padding(.horizontal)
+  }
+  
+  /// Payment row item
+  private func paymentRow(_ payment: Transaction) -> some View {
+    HStack {
+      // Payment icon
+      Circle()
+        .fill(Color.green)
+        .frame(width: 40, height: 40)
+        .overlay {
+          Image(systemName: "dollarsign.circle")
+            .foregroundStyle(.white)
+        }
+      
+      VStack(alignment: .leading, spacing: 4) {
+        Text(payment.description)
+          .font(.body)
+          .fontWeight(.medium)
+        
+        Text(payment.status.rawValue.capitalized)
+          .font(.caption)
+          .foregroundStyle(.secondary)
+      }
+      
+      Spacer()
+      
+      VStack(alignment: .trailing, spacing: 4) {
+        Text(formatCurrency(payment.amount.magnitude))
+          .font(.body)
+          .fontWeight(.medium)
+        
+        Text(formattedDate(payment.date))
+          .font(.caption)
+          .foregroundStyle(.secondary)
+      }
+    }
+    .padding()
+    .background(Color(.systemBackground))
+  }
+  
+  /// Formats a date in a friendly readable format
+  private func formattedDate(_ date: Date) -> String {
+    let formatter = DateFormatter()
+    formatter.dateStyle = .medium
+    formatter.timeStyle = .none
+    return formatter.string(from: date)
+  }
+  
+  /// Formats a decimal as a currency string
+  private func formatCurrency(_ value: Decimal) -> String {
+    let formatter = NumberFormatter()
+    formatter.numberStyle = .currency
+    formatter.minimumFractionDigits = 2
+    formatter.maximumFractionDigits = 2
+    return formatter.string(from: value as NSDecimalNumber) ?? "$0.00"
+  }
+}
+
+/// View displaying quick action buttons
+private struct QuickActionsView: View {
+  @Binding var showingPaymentSheet: Bool
+  @Binding var selectedTab: Int
+  
+  var body: some View {
+    HStack(spacing: 16) {
+      quickActionButton(
+        title: "Make Payment",
+        systemImage: "dollarsign.circle.fill",
+        action: { showingPaymentSheet = true }
+      )
+      
+      quickActionButton(
+        title: "Payment Schedule",
+        systemImage: "calendar",
+        action: { selectedTab = 0 }
+      )
+      
+      quickActionButton(
+        title: "Contact Us",
+        systemImage: "phone",
+        action: { /* Contact functionality */ }
+      )
+    }
+    .padding(.horizontal)
+  }
+  
+  /// Creates a quick action button
+  private func quickActionButton(title: String, systemImage: String, action: @escaping () -> Void) -> some View {
+    Button(action: action) {
+      VStack(spacing: 8) {
+        Image(systemName: systemImage)
+          .font(.system(size: 24))
+          .foregroundStyle(.blue)
+        
+        Text(title)
+          .font(.caption)
+          .fontWeight(.medium)
+      }
+      .frame(maxWidth: .infinity)
+      .padding()
+      .background(Color(.systemGray6))
+      .clipShape(RoundedRectangle(cornerRadius: 12))
+    }
+    .buttonStyle(.plain)
+  }
+}
+
 /// View displaying detailed information about a loan
 struct LoanDetailsView: View {
   // MARK: - Properties
@@ -24,13 +454,13 @@ struct LoanDetailsView: View {
       if let loan = viewModel.loan {
         VStack(spacing: 20) {
           // Loan summary card
-          loanSummaryCard(loan)
+          LoanSummaryCardView(loan: loan, formattedInterestRate: viewModel.formattedInterestRate)
           
           // Payment progress
-          paymentProgressView(loan)
+          PaymentProgressView(loan: loan, percentagePaid: viewModel.percentagePaid, totalPaid: viewModel.totalPaid)
           
           // Quick actions
-          quickActionsView
+          QuickActionsView(showingPaymentSheet: $showingPaymentSheet, selectedTab: $selectedTab)
           
           // Payment schedule and history
           VStack(spacing: 4) {
@@ -46,11 +476,11 @@ struct LoanDetailsView: View {
             // Content based on selected tab
             switch selectedTab {
             case 0:
-              nextPaymentView(loan)
+              NextPaymentView(loan: loan, daysUntilNextPayment: viewModel.daysUntilNextPayment, showingPaymentSheet: $showingPaymentSheet)
             case 1:
-              paymentHistoryView
+              PaymentHistoryView(paymentHistory: viewModel.paymentHistory)
             case 2:
-              loanDetailsView(loan)
+              LoanDetailsInfoView(loan: loan, formattedInterestRate: viewModel.formattedInterestRate)
             default:
               EmptyView()
             }
@@ -114,390 +544,6 @@ struct LoanDetailsView: View {
       // Load data when view appears
       viewModel.loadData()
     }
-  }
-  
-  // MARK: - Subviews
-  
-  /// Loan summary card showing loan details
-  /// - Parameter loan: Loan to display
-  /// - Returns: Loan summary view
-  private func loanSummaryCard(_ loan: Loan) -> some View {
-    VStack(spacing: 16) {
-      HStack {
-        VStack(alignment: .leading, spacing: 4) {
-          Text(loan.loanType.displayName)
-            .font(.subheadline)
-            .foregroundStyle(.secondary)
-          
-          Text(loan.name)
-            .font(.title2)
-            .fontWeight(.bold)
-        }
-        
-        Spacer()
-        
-        loanTypeIcon(loan.loanType)
-      }
-      
-      Divider()
-      
-      VStack(spacing: 12) {
-        balanceRow(title: "Current Balance", amount: loan.currentBalance, isPrimary: true)
-        balanceRow(title: "Monthly Payment", amount: loan.monthlyPayment, isPrimary: false)
-        balanceRow(title: "Interest Rate", amount: nil, formattedValue: viewModel.formattedInterestRate, isPrimary: false)
-      }
-    }
-    .padding()
-    .background(Color(.systemBackground))
-    .clipShape(RoundedRectangle(cornerRadius: 12))
-    .shadow(color: .black.opacity(0.1), radius: 5, x: 0, y: 2)
-    .padding(.horizontal)
-  }
-  
-  /// Payment progress view
-  /// - Parameter loan: Loan to display progress for
-  /// - Returns: Progress view
-  private func paymentProgressView(_ loan: Loan) -> some View {
-    VStack(spacing: 12) {
-      HStack {
-        Text("Loan Payoff Progress")
-          .font(.headline)
-        
-        Spacer()
-        
-        Text("\(Int(viewModel.percentagePaid))%")
-          .font(.headline)
-          .foregroundStyle(.blue)
-      }
-      
-      ProgressView(value: viewModel.percentagePaid, total: 100)
-        .tint(.blue)
-        .frame(height: 8)
-      
-      HStack {
-        VStack(alignment: .leading, spacing: 4) {
-          Text("Original Amount")
-            .font(.caption)
-            .foregroundStyle(.secondary)
-          
-          Text(formatCurrency(loan.originalPrincipal))
-            .font(.subheadline)
-        }
-        
-        Spacer()
-        
-        VStack(alignment: .trailing, spacing: 4) {
-          Text("Total Paid")
-            .font(.caption)
-            .foregroundStyle(.secondary)
-          
-          Text(formatCurrency(viewModel.totalPaid))
-            .font(.subheadline)
-        }
-      }
-    }
-    .padding()
-    .background(Color(.systemBackground))
-    .clipShape(RoundedRectangle(cornerRadius: 12))
-    .shadow(color: .black.opacity(0.1), radius: 5, x: 0, y: 2)
-    .padding(.horizontal)
-  }
-  
-  /// Quick action buttons
-  private var quickActionsView: some View {
-    HStack(spacing: 16) {
-      quickActionButton(
-        title: "Make Payment",
-        systemImage: "dollarsign.circle.fill",
-        action: { showingPaymentSheet = true }
-      )
-      
-      quickActionButton(
-        title: "Payment Schedule",
-        systemImage: "calendar",
-        action: { selectedTab = 0 }
-      )
-      
-      quickActionButton(
-        title: "Contact Us",
-        systemImage: "phone",
-        action: { /* Contact functionality */ }
-      )
-    }
-    .padding(.horizontal)
-  }
-  
-  /// Next payment details view
-  /// - Parameter loan: Loan to display payment details for
-  /// - Returns: Next payment view
-  private func nextPaymentView(_ loan: Loan) -> some View {
-    VStack(spacing: 16) {
-      HStack(spacing: 20) {
-        VStack(alignment: .center, spacing: 4) {
-          Text("\(viewModel.daysUntilNextPayment ?? 0)")
-            .font(.system(size: 36, weight: .bold))
-            .foregroundStyle(.blue)
-          
-          Text("Days Until Due")
-            .font(.caption)
-            .foregroundStyle(.secondary)
-        }
-        .frame(maxWidth: .infinity)
-        
-        VStack(alignment: .center, spacing: 4) {
-          Text(formatCurrency(loan.nextPaymentAmount))
-            .font(.system(size: 24, weight: .bold))
-          
-          Text("Payment Amount")
-            .font(.caption)
-            .foregroundStyle(.secondary)
-        }
-        .frame(maxWidth: .infinity)
-      }
-      .padding()
-      
-      VStack(spacing: 8) {
-        Text("Due Date: \(formattedDate(loan.nextPaymentDue))")
-          .font(.subheadline)
-        
-        Button("Make Payment Now") {
-          showingPaymentSheet = true
-        }
-        .buttonStyle(.borderedProminent)
-        .padding(.top)
-      }
-    }
-    .padding()
-    .background(Color(.systemBackground))
-    .clipShape(RoundedRectangle(cornerRadius: 12))
-    .padding(.horizontal)
-  }
-  
-  /// Payment history list
-  private var paymentHistoryView: some View {
-    VStack(spacing: 0) {
-      if viewModel.paymentHistory.isEmpty {
-        Text("No payment history found")
-          .foregroundStyle(.secondary)
-          .frame(maxWidth: .infinity, minHeight: 100)
-          .background(Color(.systemBackground))
-      } else {
-        ForEach(viewModel.paymentHistory) { payment in
-          paymentRow(payment)
-          
-          if let lastPayment = viewModel.paymentHistory.last, payment.id != lastPayment.id {
-            Divider()
-              .padding(.horizontal)
-          }
-        }
-      }
-    }
-    .background(Color(.systemGray6))
-    .clipShape(RoundedRectangle(cornerRadius: 12))
-    .padding(.horizontal)
-  }
-  
-  /// Additional loan details
-  /// - Parameter loan: Loan to display details for
-  /// - Returns: Loan details view
-  private func loanDetailsView(_ loan: Loan) -> some View {
-    VStack(spacing: 16) {
-      detailGroup(title: "Loan Information") {
-        detailRow(title: "Account Number", value: loan.accountNumber)
-        detailRow(title: "Loan Type", value: loan.loanType.displayName)
-        detailRow(title: "Interest Rate", value: viewModel.formattedInterestRate)
-      }
-      
-      detailGroup(title: "Important Dates") {
-        detailRow(title: "Origination Date", value: formattedDate(loan.originationDate))
-        detailRow(title: "Maturity Date", value: formattedDate(loan.maturityDate))
-        detailRow(title: "Payments Remaining", value: "\(loan.remainingPayments)")
-      }
-      
-      detailGroup(title: "Payment Information") {
-        detailRow(title: "Original Principal", value: formatCurrency(loan.originalPrincipal))
-        detailRow(title: "Current Balance", value: formatCurrency(loan.currentBalance))
-        detailRow(title: "Monthly Payment", value: formatCurrency(loan.monthlyPayment))
-      }
-    }
-    .padding()
-    .background(Color(.systemBackground))
-    .clipShape(RoundedRectangle(cornerRadius: 12))
-    .padding(.horizontal)
-  }
-  
-  /// Creates a quick action button
-  /// - Parameters:
-  ///   - title: Button title
-  ///   - systemImage: SF Symbol name
-  ///   - action: Action to perform when tapped
-  /// - Returns: Quick action button view
-  private func quickActionButton(title: String, systemImage: String, action: @escaping () -> Void) -> some View {
-    Button(action: action) {
-      VStack(spacing: 8) {
-        Image(systemName: systemImage)
-          .font(.system(size: 24))
-          .foregroundStyle(.blue)
-        
-        Text(title)
-          .font(.caption)
-          .fontWeight(.medium)
-      }
-      .frame(maxWidth: .infinity)
-      .padding()
-      .background(Color(.systemGray6))
-      .clipShape(RoundedRectangle(cornerRadius: 12))
-    }
-    .buttonStyle(.plain)
-  }
-  
-  /// Payment row item
-  /// - Parameter payment: Payment transaction to display
-  /// - Returns: Payment row view
-  private func paymentRow(_ payment: Transaction) -> some View {
-    HStack {
-      // Payment icon
-      Circle()
-        .fill(Color.green)
-        .frame(width: 40, height: 40)
-        .overlay {
-          Image(systemName: "dollarsign.circle")
-            .foregroundStyle(.white)
-        }
-      
-      VStack(alignment: .leading, spacing: 4) {
-        Text(payment.description)
-          .font(.body)
-          .fontWeight(.medium)
-        
-        Text(payment.status.rawValue.capitalized)
-          .font(.caption)
-          .foregroundStyle(.secondary)
-      }
-      
-      Spacer()
-      
-      VStack(alignment: .trailing, spacing: 4) {
-        Text(formatCurrency(payment.amount.magnitude))
-          .font(.body)
-          .fontWeight(.medium)
-        
-        Text(formattedDate(payment.date))
-          .font(.caption)
-          .foregroundStyle(.secondary)
-      }
-    }
-    .padding()
-    .background(Color(.systemBackground))
-  }
-  
-  /// Group of detail rows with a title
-  /// - Parameters:
-  ///   - title: Group title
-  ///   - content: Detail row content
-  /// - Returns: Detail group view
-  private func detailGroup<Content: View>(title: String, @ViewBuilder content: () -> Content) -> some View {
-    VStack(alignment: .leading, spacing: 12) {
-      Text(title)
-        .font(.headline)
-        .padding(.bottom, 4)
-      
-      content()
-    }
-  }
-  
-  /// Balance information row
-  /// - Parameters:
-  ///   - title: Row title
-  ///   - amount: Monetary amount (optional)
-  ///   - formattedValue: Pre-formatted value string (optional)
-  ///   - isPrimary: Whether this is the primary/main balance
-  /// - Returns: Balance row view
-  private func balanceRow(title: String, amount: Decimal?, formattedValue: String? = nil, isPrimary: Bool) -> some View {
-    HStack {
-      Text(title)
-        .font(isPrimary ? .headline : .subheadline)
-      
-      Spacer()
-      
-      if let amount = amount {
-        Text(formatCurrency(amount))
-          .font(isPrimary ? .title3 : .body)
-          .fontWeight(isPrimary ? .bold : .medium)
-      } else if let formattedValue = formattedValue {
-        Text(formattedValue)
-          .font(isPrimary ? .title3 : .body)
-          .fontWeight(isPrimary ? .bold : .medium)
-      }
-    }
-  }
-  
-  /// Detail information row
-  /// - Parameters:
-  ///   - title: Row title
-  ///   - value: Detail value
-  /// - Returns: Detail row view
-  private func detailRow(title: String, value: String) -> some View {
-    HStack {
-      Text(title)
-        .font(.subheadline)
-        .foregroundStyle(.secondary)
-      
-      Spacer()
-      
-      Text(value)
-        .font(.subheadline)
-    }
-  }
-  
-  /// Icon representing a loan type
-  /// - Parameter loanType: Type of loan
-  /// - Returns: Icon view
-  private func loanTypeIcon(_ loanType: LoanType) -> some View {
-    ZStack {
-      Circle()
-        .fill(Color.blue.opacity(0.1))
-        .frame(width: 40, height: 40)
-      
-      Image(systemName: {
-        switch loanType {
-        case .mortgage, .homeEquity:
-          return "house.fill"
-        case .auto:
-          return "car.fill"
-        case .personalLine, .personal:
-          return "person.text.rectangle.fill"
-        case .heloc:
-          return "house.and.flag.fill"
-        case .student:
-          return "books.vertical.fill"
-        }
-      }())
-      .foregroundStyle(.blue)
-    }
-  }
-  
-  // MARK: - Helper Methods
-  
-  /// Formats a date in a friendly readable format
-  /// - Parameter date: Date to format
-  /// - Returns: Formatted date string
-  private func formattedDate(_ date: Date) -> String {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .medium
-    formatter.timeStyle = .none
-    return formatter.string(from: date)
-  }
-  
-  /// Formats a decimal as a currency string
-  /// - Parameter value: Decimal value to format
-  /// - Returns: Currency-formatted string
-  private func formatCurrency(_ value: Decimal) -> String {
-    let formatter = NumberFormatter()
-    formatter.numberStyle = .currency
-    formatter.minimumFractionDigits = 2
-    formatter.maximumFractionDigits = 2
-    return formatter.string(from: value as NSDecimalNumber) ?? "$0.00"
   }
 }
 

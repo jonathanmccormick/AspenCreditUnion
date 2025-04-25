@@ -99,6 +99,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F9B2B6152DBB0DF500C4582D /* Build configuration list for PBXNativeTarget "AspenCreditUnion" */;
 			buildPhases = (
+				F9A149712DBB46A4007F75AF /* Run swiftlint */,
 				F9B2B5ED2DBB0DF400C4582D /* Sources */,
 				F9B2B5EE2DBB0DF400C4582D /* Frameworks */,
 				F9B2B5EF2DBB0DF400C4582D /* Resources */,
@@ -231,6 +232,29 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		F9A149712DBB46A4007F75AF /* Run swiftlint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/.swiftlint.yml",
+				"${SRCROOT}/AspenCreditUnion",
+			);
+			name = "Run swiftlint";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export PATH=\"/opt/homebrew/bin:$PATH\"\nswiftlint lint --config \"${SRCROOT}/.swiftlint.yml\" --strict\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		F9B2B5ED2DBB0DF400C4582D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -306,7 +330,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -369,7 +393,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
