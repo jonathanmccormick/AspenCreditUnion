@@ -54,36 +54,6 @@ struct FinancialSummaryCard: View {
   }
 }
 
-/// A component for displaying financial metrics
-struct FinancialItemView: View {
-  // MARK: - Properties
-  
-  let title: String
-  let value: Decimal
-  let color: Color
-  let systemImage: String
-  
-  // MARK: - View Body
-  
-  var body: some View {
-    VStack(spacing: 4) {
-      HStack(spacing: 4) {
-        Image(systemName: systemImage)
-          .foregroundStyle(color)
-        
-        Text(title)
-          .font(.caption)
-          .fontWeight(.medium)
-      }
-      
-      Text(FormatUtils.formatCurrency(value))
-        .font(.subheadline)
-        .fontWeight(.bold)
-    }
-    .frame(maxWidth: .infinity)
-  }
-}
-
 #Preview {
   FinancialSummaryCard(
     assets: 25000.00,
