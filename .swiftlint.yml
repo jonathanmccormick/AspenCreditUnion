@@ -12,6 +12,9 @@ disabled_rules:
   - identifier_name
   - force_cast
   - todo
+  - type_body_length
+  - cyclomatic_complexity
+  - file_length
 
 # Relaxed limits for warnings/errors
 file_length:

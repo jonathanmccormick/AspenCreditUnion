@@ -89,11 +89,9 @@ class LoanRepository {
   /// Invalidates cache entries containing a specific loan
   /// - Parameter loanId: The ID of the loan to invalidate
   private func invalidateLoanCache(loanId: String) {
-    for (userId, loans) in loanCache {
-      if loans.contains(where: { $0.id == loanId }) {
-        loanCache.removeValue(forKey: userId)
-        break
-      }
+    for (userId, loans) in loanCache where loans.contains(where: { $0.id == loanId }) {
+      loanCache.removeValue(forKey: userId)
+      break
     }
   }
 }
