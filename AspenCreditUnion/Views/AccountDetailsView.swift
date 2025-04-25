@@ -223,29 +223,36 @@ struct AccountDetailsView: View {
           .frame(maxWidth: .infinity, minHeight: 100)
           .background(Color(.systemBackground))
       } else {
-        ForEach(transactions as! [Transaction]) { transaction in
-          transactionRow(transaction)
+        if let transactionsArray = transactions as? [Transaction], !transactionsArray.isEmpty {
+          ForEach(transactionsArray) { transaction in
+            transactionRow(transaction)
+            
+            if let lastTransaction = transactionsArray.last, transaction.id != lastTransaction.id {
+              Divider()
+                .padding(.horizontal)
+            }
+          }
           
-          if transaction.id != (transactions.last as! Transaction).id {
-            Divider()
-              .padding(.horizontal)
+          if selectedTab != 2 {
+            Button {
+              selectedTab = 2
+              viewModel.loadAllTransactions()
+            } label: {
+              Text("View all transactions")
+                .font(.subheadline)
+                .fontWeight(.medium)
+                .foregroundStyle(.blue)
+                .padding()
+                .frame(maxWidth: .infinity)
+            }
+            .buttonStyle(.plain)
+            .background(Color(.systemBackground))
           }
-        }
-        
-        if selectedTab != 2 {
-          Button {
-            selectedTab = 2
-            viewModel.loadAllTransactions()
-          } label: {
-            Text("View all transactions")
-              .font(.subheadline)
-              .fontWeight(.medium)
-              .foregroundStyle(.blue)
-              .padding()
-              .frame(maxWidth: .infinity)
-          }
-          .buttonStyle(.plain)
-          .background(Color(.systemBackground))
+        } else {
+          Text("No transactions to display")
+            .foregroundStyle(.secondary)
+            .frame(maxWidth: .infinity, minHeight: 100)
+            .background(Color(.systemBackground))
         }
       }
     }
