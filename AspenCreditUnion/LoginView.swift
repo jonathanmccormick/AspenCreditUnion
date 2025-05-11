@@ -66,13 +66,19 @@ struct LoginView: View {
                         showLoginView = false
                     }
                 }
+            } catch let error as APIError {
+                handleError(message: error.errorDescription)
             } catch {
-                // Update UI on main thread
-                DispatchQueue.main.async {
-                    isLoading = false
-                    errorMessage = error.localizedDescription
-                }
+                handleError(message: error.localizedDescription)
             }
+        }
+    }
+    
+    private func handleError(message: String) {
+        // Update UI on main thread
+        DispatchQueue.main.async {
+            isLoading = false
+            errorMessage = message
         }
     }
 }
