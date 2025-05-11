@@ -118,9 +118,17 @@ class APIClient {
         // Decode the response
         do {
             let decoder = JSONDecoder()
-            decoder.dateDecodingStrategy = .iso8601
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSSX"
+            formatter.locale = Locale(identifier: "en_US_POSIX")
+            formatter.timeZone = TimeZone(secondsFromGMT: 0)
+
+            decoder.dateDecodingStrategy = .formatted(formatter)
             return try decoder.decode(T.self, from: data)
         } catch {
+            print("Failed to decode response")
+            print(T.self)
+            
             throw APIError.decodingFailed(error)
         }
     }

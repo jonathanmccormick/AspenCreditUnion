@@ -18,7 +18,7 @@ struct LoginRequest: Encodable {
 struct AuthResponse: Decodable {
     let token: String
     let refreshToken: String
-    let expiresAt: Date
+    let expiration: Date
 }
 
 struct RefreshTokenRequest: Encodable {
