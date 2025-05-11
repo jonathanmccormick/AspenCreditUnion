@@ -3,66 +3,101 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 77;
+	objectVersion = 56;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		F9A913F22DCE0D2B00A63D35 /* AspenCreditUnionApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A913F12DCE0D2B00A63D35 /* AspenCreditUnionApp.swift */; };
+		F9A913F42DCE0D2B00A63D35 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A913F32DCE0D2B00A63D35 /* ContentView.swift */; };
+		F9A913F62DCE0D2E00A63D35 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9A913F52DCE0D2E00A63D35 /* Assets.xcassets */; };
+		F9A913F92DCE0D2E00A63D35 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9A913F82DCE0D2E00A63D35 /* Preview Assets.xcassets */; };
+		F9A914032DCE0D2E00A63D35 /* AspenCreditUnionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A914022DCE0D2E00A63D35 /* AspenCreditUnionTests.swift */; };
+		F9A9140D2DCE0D2E00A63D35 /* AspenCreditUnionUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A9140C2DCE0D2E00A63D35 /* AspenCreditUnionUITests.swift */; };
+		F9A9140F2DCE0D2E00A63D35 /* AspenCreditUnionUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A9140E2DCE0D2E00A63D35 /* AspenCreditUnionUITestsLaunchTests.swift */; };
+		F9FFD3572DCE0FE900839608 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9FFD3442DCE0FE800839608 /* Assets.xcassets */; };
+		F9FFD3582DCE0FE900839608 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FFD3462DCE0FE800839608 /* APIClient.swift */; };
+		F9FFD3592DCE0FE900839608 /* TokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FFD3472DCE0FE800839608 /* TokenManager.swift */; };
+		F9FFD35A2DCE0FE900839608 /* APIConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FFD3482DCE0FE800839608 /* APIConfig.swift */; };
+		F9FFD35B2DCE0FE900839608 /* APIEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FFD3492DCE0FE800839608 /* APIEndpoint.swift */; };
+		F9FFD35C2DCE0FE900839608 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FFD34B2DCE0FE800839608 /* UserService.swift */; };
+		F9FFD35D2DCE0FE900839608 /* AccountService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FFD34C2DCE0FE800839608 /* AccountService.swift */; };
+		F9FFD35E2DCE0FE900839608 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FFD34D2DCE0FE800839608 /* AuthService.swift */; };
+		F9FFD35F2DCE0FE900839608 /* LoanService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FFD34E2DCE0FE800839608 /* LoanService.swift */; };
+		F9FFD3602DCE0FE900839608 /* TransactionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FFD34F2DCE0FE800839608 /* TransactionService.swift */; };
+		F9FFD3612DCE0FE900839608 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9FFD3512DCE0FE800839608 /* Preview Assets.xcassets */; };
+		F9FFD3622DCE0FE900839608 /* AccountModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FFD3532DCE0FE800839608 /* AccountModels.swift */; };
+		F9FFD3632DCE0FE900839608 /* LoanModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FFD3542DCE0FE800839608 /* LoanModels.swift */; };
+		F9FFD3642DCE0FE900839608 /* AuthModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FFD3552DCE0FE800839608 /* AuthModels.swift */; };
+		F9FFD3652DCE0FE900839608 /* TransactionModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FFD3562DCE0FE900839608 /* TransactionModels.swift */; };
+		F9FFD3692DCE12BB00839608 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FFD3662DCE12BB00839608 /* RegisterView.swift */; };
+		F9FFD36A2DCE12BB00839608 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FFD3672DCE12BB00839608 /* HomeView.swift */; };
+		F9FFD36B2DCE12BB00839608 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FFD3682DCE12BB00839608 /* LoginView.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
-		F9B2B6022DBB0DF500C4582D /* PBXContainerItemProxy */ = {
+		F9A913FF2DCE0D2E00A63D35 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = F9B2B5E92DBB0DF400C4582D /* Project object */;
+			containerPortal = F9A913E62DCE0D2A00A63D35 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = F9B2B5F02DBB0DF400C4582D;
+			remoteGlobalIDString = F9A913ED2DCE0D2B00A63D35;
 			remoteInfo = AspenCreditUnion;
 		};
-		F9B2B60C2DBB0DF500C4582D /* PBXContainerItemProxy */ = {
+		F9A914092DCE0D2E00A63D35 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = F9B2B5E92DBB0DF400C4582D /* Project object */;
+			containerPortal = F9A913E62DCE0D2A00A63D35 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = F9B2B5F02DBB0DF400C4582D;
+			remoteGlobalIDString = F9A913ED2DCE0D2B00A63D35;
 			remoteInfo = AspenCreditUnion;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		F9B2B5F12DBB0DF400C4582D /* AspenCreditUnion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AspenCreditUnion.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		F9B2B6012DBB0DF500C4582D /* AspenCreditUnionTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AspenCreditUnionTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		F9B2B60B2DBB0DF500C4582D /* AspenCreditUnionUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AspenCreditUnionUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F9A913EE2DCE0D2B00A63D35 /* AspenCreditUnion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AspenCreditUnion.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F9A913F12DCE0D2B00A63D35 /* AspenCreditUnionApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AspenCreditUnionApp.swift; sourceTree = "<group>"; };
+		F9A913F32DCE0D2B00A63D35 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		F9A913F52DCE0D2E00A63D35 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F9A913F82DCE0D2E00A63D35 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		F9A913FE2DCE0D2E00A63D35 /* AspenCreditUnionTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AspenCreditUnionTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F9A914022DCE0D2E00A63D35 /* AspenCreditUnionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AspenCreditUnionTests.swift; sourceTree = "<group>"; };
+		F9A914082DCE0D2E00A63D35 /* AspenCreditUnionUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AspenCreditUnionUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F9A9140C2DCE0D2E00A63D35 /* AspenCreditUnionUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AspenCreditUnionUITests.swift; sourceTree = "<group>"; };
+		F9A9140E2DCE0D2E00A63D35 /* AspenCreditUnionUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AspenCreditUnionUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		F9FFD3442DCE0FE800839608 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F9FFD3462DCE0FE800839608 /* APIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		F9FFD3472DCE0FE800839608 /* TokenManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenManager.swift; sourceTree = "<group>"; };
+		F9FFD3482DCE0FE800839608 /* APIConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIConfig.swift; sourceTree = "<group>"; };
+		F9FFD3492DCE0FE800839608 /* APIEndpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIEndpoint.swift; sourceTree = "<group>"; };
+		F9FFD34B2DCE0FE800839608 /* UserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		F9FFD34C2DCE0FE800839608 /* AccountService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountService.swift; sourceTree = "<group>"; };
+		F9FFD34D2DCE0FE800839608 /* AuthService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		F9FFD34E2DCE0FE800839608 /* LoanService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoanService.swift; sourceTree = "<group>"; };
+		F9FFD34F2DCE0FE800839608 /* TransactionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionService.swift; sourceTree = "<group>"; };
+		F9FFD3512DCE0FE800839608 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		F9FFD3532DCE0FE800839608 /* AccountModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountModels.swift; sourceTree = "<group>"; };
+		F9FFD3542DCE0FE800839608 /* LoanModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoanModels.swift; sourceTree = "<group>"; };
+		F9FFD3552DCE0FE800839608 /* AuthModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthModels.swift; sourceTree = "<group>"; };
+		F9FFD3562DCE0FE900839608 /* TransactionModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionModels.swift; sourceTree = "<group>"; };
+		F9FFD3662DCE12BB00839608 /* RegisterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
+		F9FFD3672DCE12BB00839608 /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		F9FFD3682DCE12BB00839608 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		F9B2B5F32DBB0DF400C4582D /* AspenCreditUnion */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = AspenCreditUnion;
-			sourceTree = "<group>";
-		};
-		F9B2B6042DBB0DF500C4582D /* AspenCreditUnionTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = AspenCreditUnionTests;
-			sourceTree = "<group>";
-		};
-		F9B2B60E2DBB0DF500C4582D /* AspenCreditUnionUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = AspenCreditUnionUITests;
-			sourceTree = "<group>";
-		};
-/* End PBXFileSystemSynchronizedRootGroup section */
-
 /* Begin PBXFrameworksBuildPhase section */
-		F9B2B5EE2DBB0DF400C4582D /* Frameworks */ = {
+		F9A913EB2DCE0D2B00A63D35 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F9B2B5FE2DBB0DF500C4582D /* Frameworks */ = {
+		F9A913FB2DCE0D2E00A63D35 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F9B2B6082DBB0DF500C4582D /* Frameworks */ = {
+		F9A914052DCE0D2E00A63D35 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -72,158 +107,231 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		F9B2B5E82DBB0DF400C4582D = {
+		F9A913E52DCE0D2A00A63D35 = {
 			isa = PBXGroup;
 			children = (
-				F9B2B5F32DBB0DF400C4582D /* AspenCreditUnion */,
-				F9B2B6042DBB0DF500C4582D /* AspenCreditUnionTests */,
-				F9B2B60E2DBB0DF500C4582D /* AspenCreditUnionUITests */,
-				F9B2B5F22DBB0DF400C4582D /* Products */,
+				F9A913F02DCE0D2B00A63D35 /* AspenCreditUnion */,
+				F9A914012DCE0D2E00A63D35 /* AspenCreditUnionTests */,
+				F9A9140B2DCE0D2E00A63D35 /* AspenCreditUnionUITests */,
+				F9A913EF2DCE0D2B00A63D35 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		F9B2B5F22DBB0DF400C4582D /* Products */ = {
+		F9A913EF2DCE0D2B00A63D35 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F9B2B5F12DBB0DF400C4582D /* AspenCreditUnion.app */,
-				F9B2B6012DBB0DF500C4582D /* AspenCreditUnionTests.xctest */,
-				F9B2B60B2DBB0DF500C4582D /* AspenCreditUnionUITests.xctest */,
+				F9A913EE2DCE0D2B00A63D35 /* AspenCreditUnion.app */,
+				F9A913FE2DCE0D2E00A63D35 /* AspenCreditUnionTests.xctest */,
+				F9A914082DCE0D2E00A63D35 /* AspenCreditUnionUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		F9A913F02DCE0D2B00A63D35 /* AspenCreditUnion */ = {
+			isa = PBXGroup;
+			children = (
+				F9FFD3672DCE12BB00839608 /* HomeView.swift */,
+				F9FFD3682DCE12BB00839608 /* LoginView.swift */,
+				F9FFD3662DCE12BB00839608 /* RegisterView.swift */,
+				F9FFD3442DCE0FE800839608 /* Assets.xcassets */,
+				F9FFD3522DCE0FE800839608 /* Models */,
+				F9FFD3452DCE0FE800839608 /* Network */,
+				F9FFD3502DCE0FE800839608 /* Preview Content */,
+				F9FFD34A2DCE0FE800839608 /* Services */,
+				F9A913F12DCE0D2B00A63D35 /* AspenCreditUnionApp.swift */,
+				F9A913F32DCE0D2B00A63D35 /* ContentView.swift */,
+				F9A913F52DCE0D2E00A63D35 /* Assets.xcassets */,
+				F9A913F72DCE0D2E00A63D35 /* Preview Content */,
+			);
+			path = AspenCreditUnion;
+			sourceTree = "<group>";
+		};
+		F9A913F72DCE0D2E00A63D35 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				F9A913F82DCE0D2E00A63D35 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		F9A914012DCE0D2E00A63D35 /* AspenCreditUnionTests */ = {
+			isa = PBXGroup;
+			children = (
+				F9A914022DCE0D2E00A63D35 /* AspenCreditUnionTests.swift */,
+			);
+			path = AspenCreditUnionTests;
+			sourceTree = "<group>";
+		};
+		F9A9140B2DCE0D2E00A63D35 /* AspenCreditUnionUITests */ = {
+			isa = PBXGroup;
+			children = (
+				F9A9140C2DCE0D2E00A63D35 /* AspenCreditUnionUITests.swift */,
+				F9A9140E2DCE0D2E00A63D35 /* AspenCreditUnionUITestsLaunchTests.swift */,
+			);
+			path = AspenCreditUnionUITests;
+			sourceTree = "<group>";
+		};
+		F9FFD3452DCE0FE800839608 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				F9FFD3462DCE0FE800839608 /* APIClient.swift */,
+				F9FFD3472DCE0FE800839608 /* TokenManager.swift */,
+				F9FFD3482DCE0FE800839608 /* APIConfig.swift */,
+				F9FFD3492DCE0FE800839608 /* APIEndpoint.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		F9FFD34A2DCE0FE800839608 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				F9FFD34B2DCE0FE800839608 /* UserService.swift */,
+				F9FFD34C2DCE0FE800839608 /* AccountService.swift */,
+				F9FFD34D2DCE0FE800839608 /* AuthService.swift */,
+				F9FFD34E2DCE0FE800839608 /* LoanService.swift */,
+				F9FFD34F2DCE0FE800839608 /* TransactionService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		F9FFD3502DCE0FE800839608 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				F9FFD3512DCE0FE800839608 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		F9FFD3522DCE0FE800839608 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F9FFD3532DCE0FE800839608 /* AccountModels.swift */,
+				F9FFD3542DCE0FE800839608 /* LoanModels.swift */,
+				F9FFD3552DCE0FE800839608 /* AuthModels.swift */,
+				F9FFD3562DCE0FE900839608 /* TransactionModels.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		F9B2B5F02DBB0DF400C4582D /* AspenCreditUnion */ = {
+		F9A913ED2DCE0D2B00A63D35 /* AspenCreditUnion */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F9B2B6152DBB0DF500C4582D /* Build configuration list for PBXNativeTarget "AspenCreditUnion" */;
+			buildConfigurationList = F9A914122DCE0D2E00A63D35 /* Build configuration list for PBXNativeTarget "AspenCreditUnion" */;
 			buildPhases = (
-				F9A149712DBB46A4007F75AF /* Run swiftlint */,
-				F9B2B5ED2DBB0DF400C4582D /* Sources */,
-				F9B2B5EE2DBB0DF400C4582D /* Frameworks */,
-				F9B2B5EF2DBB0DF400C4582D /* Resources */,
+				F9A913EA2DCE0D2B00A63D35 /* Sources */,
+				F9A913EB2DCE0D2B00A63D35 /* Frameworks */,
+				F9A913EC2DCE0D2B00A63D35 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				F9B2B5F32DBB0DF400C4582D /* AspenCreditUnion */,
 			);
 			name = AspenCreditUnion;
-			packageProductDependencies = (
-			);
 			productName = AspenCreditUnion;
-			productReference = F9B2B5F12DBB0DF400C4582D /* AspenCreditUnion.app */;
+			productReference = F9A913EE2DCE0D2B00A63D35 /* AspenCreditUnion.app */;
 			productType = "com.apple.product-type.application";
 		};
-		F9B2B6002DBB0DF500C4582D /* AspenCreditUnionTests */ = {
+		F9A913FD2DCE0D2E00A63D35 /* AspenCreditUnionTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F9B2B6182DBB0DF500C4582D /* Build configuration list for PBXNativeTarget "AspenCreditUnionTests" */;
+			buildConfigurationList = F9A914152DCE0D2E00A63D35 /* Build configuration list for PBXNativeTarget "AspenCreditUnionTests" */;
 			buildPhases = (
-				F9B2B5FD2DBB0DF500C4582D /* Sources */,
-				F9B2B5FE2DBB0DF500C4582D /* Frameworks */,
-				F9B2B5FF2DBB0DF500C4582D /* Resources */,
+				F9A913FA2DCE0D2E00A63D35 /* Sources */,
+				F9A913FB2DCE0D2E00A63D35 /* Frameworks */,
+				F9A913FC2DCE0D2E00A63D35 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				F9B2B6032DBB0DF500C4582D /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				F9B2B6042DBB0DF500C4582D /* AspenCreditUnionTests */,
+				F9A914002DCE0D2E00A63D35 /* PBXTargetDependency */,
 			);
 			name = AspenCreditUnionTests;
-			packageProductDependencies = (
-			);
 			productName = AspenCreditUnionTests;
-			productReference = F9B2B6012DBB0DF500C4582D /* AspenCreditUnionTests.xctest */;
+			productReference = F9A913FE2DCE0D2E00A63D35 /* AspenCreditUnionTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		F9B2B60A2DBB0DF500C4582D /* AspenCreditUnionUITests */ = {
+		F9A914072DCE0D2E00A63D35 /* AspenCreditUnionUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F9B2B61B2DBB0DF500C4582D /* Build configuration list for PBXNativeTarget "AspenCreditUnionUITests" */;
+			buildConfigurationList = F9A914182DCE0D2E00A63D35 /* Build configuration list for PBXNativeTarget "AspenCreditUnionUITests" */;
 			buildPhases = (
-				F9B2B6072DBB0DF500C4582D /* Sources */,
-				F9B2B6082DBB0DF500C4582D /* Frameworks */,
-				F9B2B6092DBB0DF500C4582D /* Resources */,
+				F9A914042DCE0D2E00A63D35 /* Sources */,
+				F9A914052DCE0D2E00A63D35 /* Frameworks */,
+				F9A914062DCE0D2E00A63D35 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				F9B2B60D2DBB0DF500C4582D /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				F9B2B60E2DBB0DF500C4582D /* AspenCreditUnionUITests */,
+				F9A9140A2DCE0D2E00A63D35 /* PBXTargetDependency */,
 			);
 			name = AspenCreditUnionUITests;
-			packageProductDependencies = (
-			);
 			productName = AspenCreditUnionUITests;
-			productReference = F9B2B60B2DBB0DF500C4582D /* AspenCreditUnionUITests.xctest */;
+			productReference = F9A914082DCE0D2E00A63D35 /* AspenCreditUnionUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		F9B2B5E92DBB0DF400C4582D /* Project object */ = {
+		F9A913E62DCE0D2A00A63D35 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1620;
-				LastUpgradeCheck = 1620;
+				LastSwiftUpdateCheck = 1520;
+				LastUpgradeCheck = 1520;
 				TargetAttributes = {
-					F9B2B5F02DBB0DF400C4582D = {
-						CreatedOnToolsVersion = 16.2;
+					F9A913ED2DCE0D2B00A63D35 = {
+						CreatedOnToolsVersion = 15.2;
 					};
-					F9B2B6002DBB0DF500C4582D = {
-						CreatedOnToolsVersion = 16.2;
-						TestTargetID = F9B2B5F02DBB0DF400C4582D;
+					F9A913FD2DCE0D2E00A63D35 = {
+						CreatedOnToolsVersion = 15.2;
+						TestTargetID = F9A913ED2DCE0D2B00A63D35;
 					};
-					F9B2B60A2DBB0DF500C4582D = {
-						CreatedOnToolsVersion = 16.2;
-						TestTargetID = F9B2B5F02DBB0DF400C4582D;
+					F9A914072DCE0D2E00A63D35 = {
+						CreatedOnToolsVersion = 15.2;
+						TestTargetID = F9A913ED2DCE0D2B00A63D35;
 					};
 				};
 			};
-			buildConfigurationList = F9B2B5EC2DBB0DF400C4582D /* Build configuration list for PBXProject "AspenCreditUnion" */;
+			buildConfigurationList = F9A913E92DCE0D2A00A63D35 /* Build configuration list for PBXProject "AspenCreditUnion" */;
+			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
 			);
-			mainGroup = F9B2B5E82DBB0DF400C4582D;
-			minimizedProjectReferenceProxies = 1;
-			preferredProjectObjectVersion = 77;
-			productRefGroup = F9B2B5F22DBB0DF400C4582D /* Products */;
+			mainGroup = F9A913E52DCE0D2A00A63D35;
+			productRefGroup = F9A913EF2DCE0D2B00A63D35 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				F9B2B5F02DBB0DF400C4582D /* AspenCreditUnion */,
-				F9B2B6002DBB0DF500C4582D /* AspenCreditUnionTests */,
-				F9B2B60A2DBB0DF500C4582D /* AspenCreditUnionUITests */,
+				F9A913ED2DCE0D2B00A63D35 /* AspenCreditUnion */,
+				F9A913FD2DCE0D2E00A63D35 /* AspenCreditUnionTests */,
+				F9A914072DCE0D2E00A63D35 /* AspenCreditUnionUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		F9B2B5EF2DBB0DF400C4582D /* Resources */ = {
+		F9A913EC2DCE0D2B00A63D35 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F9FFD3612DCE0FE900839608 /* Preview Assets.xcassets in Resources */,
+				F9A913F92DCE0D2E00A63D35 /* Preview Assets.xcassets in Resources */,
+				F9FFD3572DCE0FE900839608 /* Assets.xcassets in Resources */,
+				F9A913F62DCE0D2E00A63D35 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F9A913FC2DCE0D2E00A63D35 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F9B2B5FF2DBB0DF500C4582D /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F9B2B6092DBB0DF500C4582D /* Resources */ = {
+		F9A914062DCE0D2E00A63D35 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -232,68 +340,66 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		F9A149712DBB46A4007F75AF /* Run swiftlint */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${SRCROOT}/.swiftlint.yml",
-				"${SRCROOT}/AspenCreditUnion",
-			);
-			name = "Run swiftlint";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "export PATH=\"/opt/homebrew/bin:$PATH\"\nswiftlint lint --config \"${SRCROOT}/.swiftlint.yml\" --strict\n";
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
-		F9B2B5ED2DBB0DF400C4582D /* Sources */ = {
+		F9A913EA2DCE0D2B00A63D35 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F9FFD35C2DCE0FE900839608 /* UserService.swift in Sources */,
+				F9A913F42DCE0D2B00A63D35 /* ContentView.swift in Sources */,
+				F9FFD35B2DCE0FE900839608 /* APIEndpoint.swift in Sources */,
+				F9FFD3632DCE0FE900839608 /* LoanModels.swift in Sources */,
+				F9FFD35E2DCE0FE900839608 /* AuthService.swift in Sources */,
+				F9FFD36A2DCE12BB00839608 /* HomeView.swift in Sources */,
+				F9FFD3592DCE0FE900839608 /* TokenManager.swift in Sources */,
+				F9A913F22DCE0D2B00A63D35 /* AspenCreditUnionApp.swift in Sources */,
+				F9FFD3602DCE0FE900839608 /* TransactionService.swift in Sources */,
+				F9FFD3652DCE0FE900839608 /* TransactionModels.swift in Sources */,
+				F9FFD35D2DCE0FE900839608 /* AccountService.swift in Sources */,
+				F9FFD3582DCE0FE900839608 /* APIClient.swift in Sources */,
+				F9FFD36B2DCE12BB00839608 /* LoginView.swift in Sources */,
+				F9FFD35A2DCE0FE900839608 /* APIConfig.swift in Sources */,
+				F9FFD3642DCE0FE900839608 /* AuthModels.swift in Sources */,
+				F9FFD3692DCE12BB00839608 /* RegisterView.swift in Sources */,
+				F9FFD35F2DCE0FE900839608 /* LoanService.swift in Sources */,
+				F9FFD3622DCE0FE900839608 /* AccountModels.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F9B2B5FD2DBB0DF500C4582D /* Sources */ = {
+		F9A913FA2DCE0D2E00A63D35 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F9A914032DCE0D2E00A63D35 /* AspenCreditUnionTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F9B2B6072DBB0DF500C4582D /* Sources */ = {
+		F9A914042DCE0D2E00A63D35 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F9A9140D2DCE0D2E00A63D35 /* AspenCreditUnionUITests.swift in Sources */,
+				F9A9140F2DCE0D2E00A63D35 /* AspenCreditUnionUITestsLaunchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		F9B2B6032DBB0DF500C4582D /* PBXTargetDependency */ = {
+		F9A914002DCE0D2E00A63D35 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = F9B2B5F02DBB0DF400C4582D /* AspenCreditUnion */;
-			targetProxy = F9B2B6022DBB0DF500C4582D /* PBXContainerItemProxy */;
+			target = F9A913ED2DCE0D2B00A63D35 /* AspenCreditUnion */;
+			targetProxy = F9A913FF2DCE0D2E00A63D35 /* PBXContainerItemProxy */;
 		};
-		F9B2B60D2DBB0DF500C4582D /* PBXTargetDependency */ = {
+		F9A9140A2DCE0D2E00A63D35 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = F9B2B5F02DBB0DF400C4582D /* AspenCreditUnion */;
-			targetProxy = F9B2B60C2DBB0DF500C4582D /* PBXContainerItemProxy */;
+			target = F9A913ED2DCE0D2B00A63D35 /* AspenCreditUnion */;
+			targetProxy = F9A914092DCE0D2E00A63D35 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		F9B2B6132DBB0DF500C4582D /* Debug */ = {
+		F9A914102DCE0D2E00A63D35 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -330,7 +436,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -345,7 +451,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -356,7 +462,7 @@
 			};
 			name = Debug;
 		};
-		F9B2B6142DBB0DF500C4582D /* Release */ = {
+		F9A914112DCE0D2E00A63D35 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -393,7 +499,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -402,7 +508,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -412,7 +518,7 @@
 			};
 			name = Release;
 		};
-		F9B2B6162DBB0DF500C4582D /* Debug */ = {
+		F9A914132DCE0D2E00A63D35 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -433,6 +539,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				NSAppTransportSecurity = "";
 				PRODUCT_BUNDLE_IDENTIFIER = me.jonathanmccormick.AspenCreditUnion;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -441,7 +548,7 @@
 			};
 			name = Debug;
 		};
-		F9B2B6172DBB0DF500C4582D /* Release */ = {
+		F9A914142DCE0D2E00A63D35 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -462,6 +569,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				NSAppTransportSecurity = "";
 				PRODUCT_BUNDLE_IDENTIFIER = me.jonathanmccormick.AspenCreditUnion;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -470,15 +578,16 @@
 			};
 			name = Release;
 		};
-		F9B2B6192DBB0DF500C4582D /* Debug */ = {
+		F9A914162DCE0D2E00A63D35 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 88VTP5F2WA;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = me.jonathanmccormick.AspenCreditUnionTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -489,15 +598,16 @@
 			};
 			name = Debug;
 		};
-		F9B2B61A2DBB0DF500C4582D /* Release */ = {
+		F9A914172DCE0D2E00A63D35 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 88VTP5F2WA;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = me.jonathanmccormick.AspenCreditUnionTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -508,9 +618,10 @@
 			};
 			name = Release;
 		};
-		F9B2B61C2DBB0DF500C4582D /* Debug */ = {
+		F9A914192DCE0D2E00A63D35 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 88VTP5F2WA;
@@ -525,9 +636,10 @@
 			};
 			name = Debug;
 		};
-		F9B2B61D2DBB0DF500C4582D /* Release */ = {
+		F9A9141A2DCE0D2E00A63D35 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 88VTP5F2WA;
@@ -545,43 +657,43 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		F9B2B5EC2DBB0DF400C4582D /* Build configuration list for PBXProject "AspenCreditUnion" */ = {
+		F9A913E92DCE0D2A00A63D35 /* Build configuration list for PBXProject "AspenCreditUnion" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				F9B2B6132DBB0DF500C4582D /* Debug */,
-				F9B2B6142DBB0DF500C4582D /* Release */,
+				F9A914102DCE0D2E00A63D35 /* Debug */,
+				F9A914112DCE0D2E00A63D35 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F9B2B6152DBB0DF500C4582D /* Build configuration list for PBXNativeTarget "AspenCreditUnion" */ = {
+		F9A914122DCE0D2E00A63D35 /* Build configuration list for PBXNativeTarget "AspenCreditUnion" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				F9B2B6162DBB0DF500C4582D /* Debug */,
-				F9B2B6172DBB0DF500C4582D /* Release */,
+				F9A914132DCE0D2E00A63D35 /* Debug */,
+				F9A914142DCE0D2E00A63D35 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F9B2B6182DBB0DF500C4582D /* Build configuration list for PBXNativeTarget "AspenCreditUnionTests" */ = {
+		F9A914152DCE0D2E00A63D35 /* Build configuration list for PBXNativeTarget "AspenCreditUnionTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				F9B2B6192DBB0DF500C4582D /* Debug */,
-				F9B2B61A2DBB0DF500C4582D /* Release */,
+				F9A914162DCE0D2E00A63D35 /* Debug */,
+				F9A914172DCE0D2E00A63D35 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F9B2B61B2DBB0DF500C4582D /* Build configuration list for PBXNativeTarget "AspenCreditUnionUITests" */ = {
+		F9A914182DCE0D2E00A63D35 /* Build configuration list for PBXNativeTarget "AspenCreditUnionUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				F9B2B61C2DBB0DF500C4582D /* Debug */,
-				F9B2B61D2DBB0DF500C4582D /* Release */,
+				F9A914192DCE0D2E00A63D35 /* Debug */,
+				F9A9141A2DCE0D2E00A63D35 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = F9B2B5E92DBB0DF400C4582D /* Project object */;
+	rootObject = F9A913E62DCE0D2A00A63D35 /* Project object */;
 }

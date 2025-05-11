@@ -1,51 +1,35 @@
 import Foundation
-import Combine
 
-/// Protocol defining user data access operations
-protocol UserService {
-  /// Fetches the current authenticated user
-  /// - Returns: A publisher that emits the current user or an error
-  func getCurrentUser() -> AnyPublisher<User, Error>
-  
-  /// Updates user profile information
-  /// - Parameter user: Updated user information
-  /// - Returns: A publisher that emits the updated user or an error
-  func updateUserProfile(user: User) -> AnyPublisher<User, Error>
-}
-
-/// Mock implementation of UserService that provides hardcoded data
-class MockUserService: UserService {
-  /// Mock user data
-  private let mockUser = User(
-    id: "usr_12345",
-    firstName: "John",
-    lastName: "Smith",
-    email: "john.smith@example.com",
-    phoneNumber: "(555) 123-4567",
-    address: Address(
-      street: "123 Main Street",
-      street2: "Apt 4B",
-      city: "Denver",
-      state: "CO",
-      zipCode: "80202"
-    ),
-    memberSince: Calendar.current.date(from: DateComponents(year: 2018, month: 6, day: 15))!
-  )
-  
-  /// Provides mock user data
-  /// - Returns: A publisher that emits the mock user data
-  func getCurrentUser() -> AnyPublisher<User, Error> {
-    Just(mockUser)
-      .setFailureType(to: Error.self)
-      .eraseToAnyPublisher()
-  }
-  
-  /// Simulates updating user profile (returns the same user in this mock)
-  /// - Parameter user: Updated user information
-  /// - Returns: A publisher that emits the updated user
-  func updateUserProfile(user: User) -> AnyPublisher<User, Error> {
-    Just(user)
-      .setFailureType(to: Error.self)
-      .eraseToAnyPublisher()
-  }
+class UserService {
+    static let shared = UserService()
+    private let apiClient = APIClient.shared
+    
+    private init() {}
+    
+    // Get user profile
+    func getProfile() async throws -> UserProfile {
+        return try await apiClient.request(endpoint: .getProfile)
+    }
+    
+    // Update user profile
+    func updateProfile(firstName: String, lastName: String, phoneNumber: String?) async throws -> UserProfile {
+        let request = UpdateProfileRequest(
+            firstName: firstName,
+            lastName: lastName,
+            phoneNumber: phoneNumber
+        )
+        
+        return try await apiClient.request(endpoint: .updateProfile, body: request)
+    }
+    
+    // Change password
+    func changePassword(currentPassword: String, newPassword: String, confirmPassword: String) async throws {
+        let request = ChangePasswordRequest(
+            currentPassword: currentPassword,
+            newPassword: newPassword,
+            confirmPassword: confirmPassword
+        )
+        
+        let _: EmptyResponse = try await apiClient.request(endpoint: .changePassword, body: request)
+    }
 }

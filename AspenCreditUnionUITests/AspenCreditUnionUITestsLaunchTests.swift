@@ -2,14 +2,14 @@
 //  AspenCreditUnionUITestsLaunchTests.swift
 //  AspenCreditUnionUITests
 //
-//  Created by Jonathan McCormick on 4/24/25.
+//  Created by Jonathan McCormick on 5/9/25.
 //
 
 import XCTest
 
 final class AspenCreditUnionUITestsLaunchTests: XCTestCase {
 
-    override static var runsForEachTargetApplicationUIConfiguration: Bool {
+    override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true
     }
 
@@ -17,7 +17,6 @@ final class AspenCreditUnionUITestsLaunchTests: XCTestCase {
         continueAfterFailure = false
     }
 
-    @MainActor
     func testLaunch() throws {
         let app = XCUIApplication()
         app.launch()
