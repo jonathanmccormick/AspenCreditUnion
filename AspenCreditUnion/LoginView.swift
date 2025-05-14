@@ -16,8 +16,10 @@ struct LoginView: View {
                     TextField("Email", text: $email)
                         .autocapitalization(.none)
                         .keyboardType(.emailAddress)
+                        .textContentType(.emailAddress)
                     
                     SecureField("Password", text: $password)
+                        .textContentType(.password)
                 }
                 
                 if !errorMessage.isEmpty {
