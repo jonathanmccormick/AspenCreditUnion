@@ -9,8 +9,7 @@ enum Environment: String {
         case .local:
             return URL(string: "http://localhost:5000")!
         case .production:
-            // Replace with actual production URL when available
-            return URL(string: "https://api.wessex-group.com")!
+            return URL(string: "https://aspencreditunionapi.jonathanmccormick.me")!
         }
     }
 }
